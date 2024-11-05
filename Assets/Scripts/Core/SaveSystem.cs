@@ -13,6 +13,7 @@ public static class SaveSystem
     public static int GetHighScore()
     {
         // Loads the saved high score.
+        return 0;
     }
 
     public static void ClearData()

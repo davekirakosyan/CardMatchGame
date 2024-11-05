@@ -20,6 +20,7 @@ public class LayoutManager : MonoBehaviour
     private Vector2 CalculateStartPosition()
     {
         // Calculates the starting position for the grid so it is centered.
+        return new Vector2(0,0);
     }
 
     
