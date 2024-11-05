@@ -1,18 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance { get; private set; }
+
+    public int defaultRows = 4;
+    public int defaultColumns = 4;
+    public int score = 0;
+
+    [Header("References")]
+    public LayoutManager layoutManager;
+    public ScoreManager scoreManager;
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        StartNewGame();
+    }
+
+    // Starts a new game with the default board size.
+    public void StartNewGame()
+    {
+        score = 0;
+        //setup board and reset game 
+    }
+
+    
+    public void AddScore(int points)
+    {
+        // Adds points to the score and updates the UI.
+    }
+
+    public void GameOver()
+    {
+        // Ends the game and displays a win message.
+        Debug.Log("Game Over! All pairs matched!");
     }
 }

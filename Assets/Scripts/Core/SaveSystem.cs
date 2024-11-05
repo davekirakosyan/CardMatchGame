@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+public static class SaveSystem
 {
-    // Start is called before the first frame update
-    void Start()
+    private const string HighScoreKey = "HighScore";
+
+    public static void SaveHighScore(int score)
     {
-        
+        // Saves the high score if it's higher than the current saved high score.
+        Debug.Log("New high score saved: " + score);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static int GetHighScore()
     {
-        
+        // Loads the saved high score.
+    }
+
+    public static void ClearData()
+    {
+        // Clears all saved data.
     }
 }
