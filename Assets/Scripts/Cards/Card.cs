@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int CardID { get; private set; }
+    public bool IsFlipped { get; private set; } = false;
+    private bool isMatched = false;
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMouseDown()
     {
-        
+        Debug.Log("Clicked" + CardID);
+        if (!isMatched && !IsFlipped)
+        {
+            GameMechanics.Instance.OnCardSelected(this);
+        }
+    }
+
+    public void Initialize(int id)
+    {
+        CardID = id;
+    }
+
+    public void FlipCard()
+    {
+        IsFlipped = !IsFlipped;
+        transform.Rotate(0, 180, 0);
+    }
+
+    public void SetMatched()
+    {
+        isMatched = true;
+        //destroy card
     }
 }

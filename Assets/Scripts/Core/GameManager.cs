@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         score = 0;
+        layoutManager.SetupBoard(2, 2);
         //setup board and reset game 
     }
 

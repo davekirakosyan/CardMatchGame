@@ -27,6 +27,22 @@ public class GameMechanics : MonoBehaviour
     public void OnCardSelected(Card selectedCard)
     {
         //check selected card, if it is second card call compare method
+        if (isCheckingMatch || selectedCard.IsFlipped || selectedCard == firstSelectedCard)
+        {
+            return;
+        }
+
+        selectedCard.FlipCard();
+
+        if (firstSelectedCard == null)
+        {
+            firstSelectedCard = selectedCard;
+        }
+        else
+        {
+            secondSelectedCard = selectedCard;
+            StartCoroutine(CheckForMatch());
+        }
     }
 
     private IEnumerator CheckForMatch()
