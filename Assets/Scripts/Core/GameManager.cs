@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject optionsPanel;
 
+    public AudioManager audioManager;
+
     private void Awake()
     {
         if (Instance == null)

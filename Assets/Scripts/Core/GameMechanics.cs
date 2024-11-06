@@ -56,7 +56,7 @@ public class GameMechanics : MonoBehaviour
         {
             pairsMatched++;
             GameManager.Instance.AddScore(10);
-
+            GameManager.Instance.audioManager.PlayMatchedAudio();
             StartCoroutine(firstSelectedCard.SetMatched());
             StartCoroutine(secondSelectedCard.SetMatched());
 
@@ -68,6 +68,7 @@ public class GameMechanics : MonoBehaviour
         else
         {
             GameManager.Instance.AddScore(-2);
+            GameManager.Instance.audioManager.PlayRejectedAudio();
             //yield return new WaitForSeconds(flipDelay);
             StartCoroutine(firstSelectedCard.FlipCard(false,flipDelay));
             StartCoroutine(secondSelectedCard.FlipCard(false,flipDelay));
