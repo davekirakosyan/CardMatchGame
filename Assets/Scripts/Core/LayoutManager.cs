@@ -4,13 +4,14 @@ using UnityEngine;
 public class LayoutManager : MonoBehaviour
 {
     public Transform boardTransform;        // Parent transform for all card objects
-    public GameObject cardPrefab;           // Prefab for an individual card
+    public GameObject[] cardPrefabs;           // Prefab for an individual card
     public float spacingHorizontal = 1f;    // Horuzontal spacing multiplier for card positioning
     public float spacingVertical = 1f;      // Vertical spacing multiplier for card positioning
 
     private int rows;                       // Number of rows in the grid
     private int columns;                    // Number of columns in the grid
     private List<GameObject> cards = new List<GameObject>();  // List to track created cards
+    private List<int> cardsID = new List<int>();
 
     public void SetupBoard(int rows, int columns)
     {
@@ -23,11 +24,17 @@ public class LayoutManager : MonoBehaviour
         Vector2 startPos = CalculateStartPosition();
 
         int totalCards = rows * columns;
+        for (int i = 1; i <= totalCards / 2; i++)
+        {
+            cardsID.Add(i-1);
+            cardsID.Add(i-1);
+        }
+        Shuffle(cardsID);
         for (int i = 0; i < totalCards; i++)
         {
-            GameObject card = Instantiate(cardPrefab,boardTransform);
+            GameObject card = Instantiate(cardPrefabs[cardsID[i]], boardTransform);
 
-            card.GetComponent<Card>().Initialize(i / 2);
+            card.GetComponent<Card>().Initialize(cardsID[i]);
 
             PositionCard(card, i, startPos);
 
@@ -35,7 +42,18 @@ public class LayoutManager : MonoBehaviour
         }
     }
 
-    
+    private void Shuffle(List<int> list)
+    {
+        System.Random random = new System.Random();
+        int n = list.Count;
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+            // Swap
+            (list[j], list[i]) = (list[i], list[j]);
+        }
+    }
+
     private Vector2 CalculateStartPosition()
     {
         // Calculates the starting position for the grid so it is centered.
@@ -44,7 +62,7 @@ public class LayoutManager : MonoBehaviour
         return new Vector2(-gridWidth / 2, -gridHeight / 2);
     }
 
-    
+
     private void PositionCard(GameObject card, int index, Vector2 startPos)
     {
         // Positions a card in the grid based on its index.
