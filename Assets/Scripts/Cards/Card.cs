@@ -34,6 +34,6 @@ public class Card : MonoBehaviour
     public void SetMatched()
     {
         isMatched = true;
-        //destroy card
+        Destroy(this.gameObject);
     }
 }
