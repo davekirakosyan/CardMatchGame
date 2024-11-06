@@ -34,12 +34,15 @@ public class Card : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
         IsFlipped = !IsFlipped;
-        transform.Rotate(0, 180, 0);
+        GetComponent<Animator>().SetBool("Flip",IsFlipped);
+        //transform.Rotate(0, 180, 0);
     }
 
-    public void SetMatched()
+    public IEnumerator SetMatched()
     {
+        yield return new WaitForSeconds(0.2f);
         isMatched = true;
-        Destroy(this.gameObject);
+        GetComponent<Animator>().SetBool("Destroyed", true);
+        //Destroy(this.gameObject);
     }
 }

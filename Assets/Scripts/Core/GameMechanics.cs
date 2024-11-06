@@ -57,8 +57,8 @@ public class GameMechanics : MonoBehaviour
             pairsMatched++;
             GameManager.Instance.AddScore(10);
 
-            firstSelectedCard.SetMatched();
-            secondSelectedCard.SetMatched();
+            StartCoroutine(firstSelectedCard.SetMatched());
+            StartCoroutine(secondSelectedCard.SetMatched());
 
             if (pairsMatched >= (GameManager.Instance.defaultRows * GameManager.Instance.defaultColumns) / 2)
             {
