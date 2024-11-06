@@ -42,16 +42,18 @@ public class LayoutManager : MonoBehaviour
 
             cards.Add(card);
         }
-        if (rows > 2 || columns > 6)
+        if (rows > 2 || columns > 4)
         {
-            if (Mathf.Max(rows, columns) == rows)
-            {
-                mainCamera.orthographicSize = (5 + (2.05f * rows - 3));
-            }
-            else
-            {
-                mainCamera.orthographicSize = (5 + (columns - 6));
-            }
+            mainCamera.orthographicSize = Mathf.Max(5 + (2.05f * (rows - 2)), (5 + (columns - 6)));
+
+            //if (Mathf.Max(rows, columns) == rows)
+            //{
+            //    mainCamera.orthographicSize = (5 + (2.05f * rows - 2));
+            //}
+            //else
+            //{
+            //    mainCamera.orthographicSize = (5 + (columns - 4));
+            //}
         }
     }
 
