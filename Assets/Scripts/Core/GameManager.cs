@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameUIPanel;
     public GameObject gameOverPanel;
     public GameObject optionsPanel;
+    public GameObject mainMenuPanel;
 
     public AudioManager audioManager;
 
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         gameUIPanel.SetActive(true);
         gameOverPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         scoreManager.UpdateScore(score);
         scoreManager.UpdateHighScore();
         layoutManager.SetupBoard(defaultRows, defaultColumns);
@@ -52,6 +54,11 @@ public class GameManager : MonoBehaviour
         score+=points;
         scoreManager.UpdateScore(score);
         // Adds points to the score and updates the UI.
+    }
+
+    public void UpdateCombo(int combo)
+    {
+        scoreManager.UpdateCombo(combo);
     }
 
     public void GameOver()
@@ -77,6 +84,8 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
-
+        mainMenuPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
     }
 }

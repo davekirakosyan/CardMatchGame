@@ -12,6 +12,8 @@ public class GameMechanics : MonoBehaviour
     private bool isCheckingMatch = false;
     private int pairsMatched = 0;
 
+    private int comboMultiplier = 1;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,6 +24,7 @@ public class GameMechanics : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        GameManager.Instance.mainMenuPanel.SetActive(true);
     }
 
     public void OnCardSelected(Card selectedCard)
@@ -55,10 +58,13 @@ public class GameMechanics : MonoBehaviour
         if (firstSelectedCard.CardID == secondSelectedCard.CardID)
         {
             pairsMatched++;
-            GameManager.Instance.AddScore(10);
+            GameManager.Instance.AddScore(5*comboMultiplier);
             GameManager.Instance.audioManager.PlayMatchedAudio();
             StartCoroutine(firstSelectedCard.SetMatched());
             StartCoroutine(secondSelectedCard.SetMatched());
+
+            comboMultiplier++;
+            GameManager.Instance.UpdateCombo(comboMultiplier);
 
             if (pairsMatched >= (GameManager.Instance.defaultRows * GameManager.Instance.defaultColumns) / 2)
             {
@@ -67,6 +73,8 @@ public class GameMechanics : MonoBehaviour
         }
         else
         {
+            comboMultiplier = 1;
+            GameManager.Instance.UpdateCombo(comboMultiplier);
             GameManager.Instance.AddScore(-2);
             GameManager.Instance.audioManager.PlayRejectedAudio();
             //yield return new WaitForSeconds(flipDelay);

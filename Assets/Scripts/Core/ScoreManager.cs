@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI comboText;
     public int currentScore;
 
     public void UpdateScore(int score)
@@ -14,10 +15,9 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void AddScore(int points)
+    public void UpdateCombo(int combo)
     {
-        currentScore += points;
-        scoreText.text = "Score: " + currentScore;
+        comboText.text = "X" + combo;
     }
 
     public void UpdateHighScore()
