@@ -22,6 +22,7 @@ public class LayoutManager : MonoBehaviour
         this.columns = columns;
 
         ClearBoard();
+        cardsID.Clear();
 
         Vector2 startPos = CalculateStartPosition();
 

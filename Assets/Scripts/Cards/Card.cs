@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class Card : MonoBehaviour
 {
@@ -7,12 +8,57 @@ public class Card : MonoBehaviour
     public bool IsFlipped { get; private set; } = false;
     private bool isMatched = false;
 
-    private void Start()
+    void Update()
     {
-        
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            // If pointer is over UI, do nothing to avoid interacting with 3D objects
+            return;
+        }
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                {
+                    OnTouch();
+                }
+            }
+        }
+    #endif
+
+        // Check if there are any touches
+        if (Input.touchCount > 0)
+        {
+            Debug.Log("touch");
+            Touch touch = Input.GetTouch(0);
+
+            // Check if this is the start of a touch
+            if (touch.phase == TouchPhase.Began)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit hit;
+
+                // Perform raycast to detect touch on objects with colliders
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider != null && hit.collider.gameObject == gameObject)
+                    {
+                        // Call custom touch handler or any other code
+                        OnTouch();
+                    }
+                }
+            }
+        }
     }
 
-    public void OnMouseDown()
+    public void OnTouch()
     {
         Debug.Log("Clicked" + CardID);
         if (!isMatched && !IsFlipped)
