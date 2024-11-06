@@ -33,20 +33,27 @@ public class GameManager : MonoBehaviour
     // Starts a new game with the default board size.
     public void StartNewGame()
     {
-        score = 0;
-        layoutManager.SetupBoard(defaultRows, defaultColumns);
         //setup board and reset game 
+        score = 0;
+        scoreManager.UpdateScore(score);
+        scoreManager.UpdateHighScore();
+        layoutManager.SetupBoard(defaultRows, defaultColumns);
+        GameMechanics.Instance.ResetGame();
     }
 
     
     public void AddScore(int points)
     {
+        score+=points;
+        scoreManager.UpdateScore(score);
         // Adds points to the score and updates the UI.
     }
 
     public void GameOver()
     {
         // Ends the game and displays a win message.
+        scoreManager.SaveHighScore(score);
+        scoreManager.UpdateHighScore();
         Debug.Log("Game Over! All pairs matched!");
     }
 }

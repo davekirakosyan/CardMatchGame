@@ -67,6 +67,7 @@ public class GameMechanics : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.AddScore(-2);
             yield return new WaitForSeconds(flipDelay);
             firstSelectedCard.FlipCard();
             secondSelectedCard.FlipCard();
