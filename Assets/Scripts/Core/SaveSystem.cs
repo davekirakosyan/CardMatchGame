@@ -3,6 +3,7 @@ using UnityEngine;
 public static class SaveSystem
 {
     private const string HighScoreKey = "HighScore";
+    private const string SoundVolumeKey = "SoundVolume";
 
     public static void SaveHighScore(int score)
     {
@@ -15,6 +16,16 @@ public static class SaveSystem
             Debug.Log("New high score saved: " + score);
         }
         Debug.Log("New high score saved: " + score);
+    }
+
+    public static void SaveSettings(float volume)
+    {
+        PlayerPrefs.SetFloat(SoundVolumeKey, volume);
+    }
+
+    public static float GetSoundVolume()
+    {
+        return PlayerPrefs.GetFloat(SoundVolumeKey);
     }
 
     public static int GetHighScore()

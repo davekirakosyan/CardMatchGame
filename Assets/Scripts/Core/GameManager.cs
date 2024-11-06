@@ -30,11 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        //StartNewGame();
+        audioManager.audioSource.volume = SaveSystem.GetSoundVolume();
     }
 
     // Starts a new game with the default board size.
