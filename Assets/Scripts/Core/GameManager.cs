@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         scoreManager.UpdateHighScore();
         gameUIPanel.SetActive(false);
         gameOverPanel.SetActive(true);
+        audioManager.PlayGameOverAudio();
         Debug.Log("Game Over! All pairs matched!");
     }
 

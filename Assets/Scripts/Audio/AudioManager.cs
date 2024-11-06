@@ -27,6 +27,18 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void PlayCardFlipAudio()
+    {
+        audioSource.clip = audioClips[2];
+        audioSource.Play();
+    }
+
+    public void PlayGameOverAudio()
+    {
+        audioSource.clip = audioClips[3];
+        audioSource.Play();
+    }
+
     public void ChangeVolume()
     {
         audioSource.volume = volumeSlider.value;

@@ -60,6 +60,7 @@ public class Card : MonoBehaviour
 
     public void OnTouch()
     {
+        GameManager.Instance.audioManager.PlayCardFlipAudio();
         Debug.Log("Clicked" + CardID);
         if (!isMatched && !IsFlipped)
         {
