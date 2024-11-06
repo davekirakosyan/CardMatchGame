@@ -5,7 +5,7 @@ public class GameMechanics : MonoBehaviour
 {
     public static GameMechanics Instance { get; private set; }
 
-    public float flipDelay = 1.0f;
+    public float flipDelay = 0.5f;
 
     private Card firstSelectedCard = null;
     private Card secondSelectedCard = null;
@@ -32,7 +32,7 @@ public class GameMechanics : MonoBehaviour
             return;
         }
 
-        selectedCard.FlipCard();
+        StartCoroutine(selectedCard.FlipCard(true,flipDelay));
 
         if (firstSelectedCard == null)
         {
@@ -41,11 +41,11 @@ public class GameMechanics : MonoBehaviour
         else
         {
             secondSelectedCard = selectedCard;
-            StartCoroutine(CheckForMatch());
+            CheckForMatch();
         }
     }
 
-    private IEnumerator CheckForMatch()
+    private void CheckForMatch()
     {
         // compare two cards and if they are matching add score and destroy cards, if not reset their states 
         //yield return new WaitForSeconds(flipDelay);
@@ -68,9 +68,9 @@ public class GameMechanics : MonoBehaviour
         else
         {
             GameManager.Instance.AddScore(-2);
-            yield return new WaitForSeconds(flipDelay);
-            firstSelectedCard.FlipCard();
-            secondSelectedCard.FlipCard();
+            //yield return new WaitForSeconds(flipDelay);
+            StartCoroutine(firstSelectedCard.FlipCard(false,flipDelay));
+            StartCoroutine(secondSelectedCard.FlipCard(false,flipDelay));
         }
 
         firstSelectedCard = null;

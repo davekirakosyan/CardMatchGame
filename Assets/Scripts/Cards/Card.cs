@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Card : MonoBehaviour
 {
@@ -25,8 +26,13 @@ public class Card : MonoBehaviour
         CardID = id;
     }
 
-    public void FlipCard()
+    public IEnumerator FlipCard(bool faceup,float delay)
     {
+        
+        if (!faceup)
+        {
+            yield return new WaitForSeconds(delay);
+        }
         IsFlipped = !IsFlipped;
         transform.Rotate(0, 180, 0);
     }
