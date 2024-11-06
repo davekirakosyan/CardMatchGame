@@ -13,6 +13,8 @@ public class LayoutManager : MonoBehaviour
     private List<GameObject> cards = new List<GameObject>();  // List to track created cards
     private List<int> cardsID = new List<int>();
 
+    public Camera mainCamera;
+
     public void SetupBoard(int rows, int columns)
     {
         // Sets up the board with a specified number of rows and columns.
@@ -26,8 +28,8 @@ public class LayoutManager : MonoBehaviour
         int totalCards = rows * columns;
         for (int i = 1; i <= totalCards / 2; i++)
         {
-            cardsID.Add(i-1);
-            cardsID.Add(i-1);
+            cardsID.Add(i - 1);
+            cardsID.Add(i - 1);
         }
         Shuffle(cardsID);
         for (int i = 0; i < totalCards; i++)
@@ -39,6 +41,17 @@ public class LayoutManager : MonoBehaviour
             PositionCard(card, i, startPos);
 
             cards.Add(card);
+        }
+        if (rows > 2 || columns > 6)
+        {
+            if (Mathf.Max(rows, columns) == rows)
+            {
+                mainCamera.orthographicSize = (5 + (2.05f * rows - 3));
+            }
+            else
+            {
+                mainCamera.orthographicSize = (5 + (columns - 6));
+            }
         }
     }
 

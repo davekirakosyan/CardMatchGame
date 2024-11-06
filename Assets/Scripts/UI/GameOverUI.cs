@@ -19,5 +19,4 @@ public class GameOverUI : MonoBehaviour
         quit.onClick.AddListener(()=>GameManager.Instance.QuitGame());
         score.text = "Score: "+ GameManager.Instance.score.ToString();
     }
-
 }

@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public ScoreManager scoreManager;
 
     [Header("UI Panels")]
-    public GameObject GameUIPanel;
-    public GameObject GameOverPanel;
-    public GameObject OptionsPanel;
+    public GameObject gameUIPanel;
+    public GameObject gameOverPanel;
+    public GameObject optionsPanel;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartNewGame();
+        //StartNewGame();
     }
 
     // Starts a new game with the default board size.
@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
     {
         //setup board and reset game 
         score = 0;
-        GameUIPanel.SetActive(true);
-        GameOverPanel.SetActive(false);
+        gameUIPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
         scoreManager.UpdateScore(score);
         scoreManager.UpdateHighScore();
         layoutManager.SetupBoard(defaultRows, defaultColumns);
@@ -61,8 +61,8 @@ public class GameManager : MonoBehaviour
         // Ends the game and displays a win message.
         scoreManager.SaveHighScore(score);
         scoreManager.UpdateHighScore();
-        GameUIPanel.SetActive(false);
-        GameOverPanel.SetActive(true);
+        gameUIPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
         Debug.Log("Game Over! All pairs matched!");
     }
 
@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void OpenOptions()
+    {
+        optionsPanel.SetActive(true);
     }
 
     public void MainMenu()
